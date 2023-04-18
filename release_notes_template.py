@@ -28,7 +28,7 @@ def get_merged_prs_after_release(repo_owner, repo_name, release_date):
     merged_prs = []
     page = 1
     while True:
-        url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/pulls?state=closed&per_page=100&page={page}'
+        url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/pulls?state=closed&since={release_date}per_page=100&page={page}'
         response = requests.get(url)
         prs = response.json()
 
@@ -40,12 +40,8 @@ def get_merged_prs_after_release(repo_owner, repo_name, release_date):
                 continue
             print(pr['user']['login'])
             if pr['merged_at']:
-                merged_date = datetime.fromisoformat(pr['merged_at'].replace("Z", "+00:00"))
-                if merged_date > release_date:
-                    summary = f"PR title: {pr['title']}\nPR summary: {pr['body']}\n"
-                    merged_prs.append(summary)
-                else:
-                    return merged_prs
+                summary = f"PR title: {pr['title']}\nPR summary: {pr['body']}\n"
+                merged_prs.append(summary)
 
         page += 1
 
@@ -96,31 +92,30 @@ def main():
         return
 
     closed_issues = get_closed_issues_after_release(repo_owner, repo_name, release_date)
-    print(closed_issues)
-    # merged_prs = get_merged_prs_after_release(repo_owner, repo_name, release_date)
+    merged_prs = get_merged_prs_after_release(repo_owner, repo_name, release_date)
 
-    # with open('summary.txt', 'w') as f:
-    #     if is_breaking_change:
-    #         f.write("❗️⚠️ BREAKING CHANGE ⚠️❗️\n")
-    #         f.write("what needs to be wiped???\n")
+    with open('summary.txt', 'w') as f:
+        if is_breaking_change:
+            f.write("❗️⚠️ BREAKING CHANGE ⚠️❗️\n")
+            f.write("what needs to be wiped???\n")
 
-    #     f.write("\n## What's New\n")
-    #     f.write("\nissues:\n")
-    #     for issue in closed_issues:
-    #         f.write(issue + '\n')
-    #     f.write("\npr's:\n")
-    #     for pr in merged_prs:
-    #         f.write(pr + '\n')
+        f.write("\n## What's New\n")
+        f.write("\nissues:\n")
+        for issue in closed_issues:
+            f.write(issue + '\n')
+        f.write("\npr's:\n")
+        for pr in merged_prs:
+            f.write(pr + '\n')
 
-    #     # Append the static version explanation
-    #     f.write("\nThere are two [versions](https://en.wikipedia.org/wiki/X86-64#Microarchitecture_levels):\n")
-    #     f.write("- x86-64-v3: for newer processors since ~2015\n")
-    #     f.write("- x86-64-v2: for older processors since ~2009 and some old VMs\n")
+        # Append the static version explanation
+        f.write("\nThere are two [versions](https://en.wikipedia.org/wiki/X86-64#Microarchitecture_levels):\n")
+        f.write("- x86-64-v3: for newer processors since ~2015\n")
+        f.write("- x86-64-v2: for older processors since ~2009 and some old VMs\n")
 
-    # file = open('summary.txt', 'r')
-    # contents = file.read()
-    # print(contents)
-    # file.close()
+    file = open('summary.txt', 'r')
+    contents = file.read()
+    print(contents)
+    file.close()
 
 if __name__ == '__main__':
     main()
