@@ -1,0 +1,31 @@
+
+## What's New
+
+issues:
+🎁 [Feature Request]: If provided path for plot directory does not exist in the system, prompt the user and create it 174 https://github.com/subspace/subspace-cli/issues/174
+🎁 [Feature Request]: Let users select the path for node files 173 https://github.com/subspace/subspace-cli/issues/173
+🐞 [Bug]: Do not give error for `wipe` if `summary` is not found 170 https://github.com/subspace/subspace-cli/issues/170
+
+pr's:
+PR title: update sdk rev
+PR summary: None
+
+PR title: implement node and plot improvements
+PR summary: Closes #174 and closes #173 
+
+This PR:
+- makes node directory customizable in `init` step
+- when user supplies a path for `node` or `plot` directory, and if that path is not created yet, the program now prompts the user for creation of this directory
+
+PR title: Update sdk
+PR summary: This ps:
+- gets rid of `unstable_tokio` for default use case
+- separates tests into its own file (since util.rs started to get fat)
+- updates sdk revision
+- refactoring `summary` structs 
+- closes #170 
+
+
+There are two [versions](https://en.wikipedia.org/wiki/X86-64#Microarchitecture_levels):
+- x86-64-v3: for newer processors since ~2015
+- x86-64-v2: for older processors since ~2009 and some old VMs
