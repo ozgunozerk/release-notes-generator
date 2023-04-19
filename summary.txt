@@ -1,0 +1,18 @@
+
+## What's New
+
+issues:
+Fixed: [🐞 [Bug]: solution subscription crashes because it cannot parse the summary sometimes 172](https://github.com/subspace/subspace-cli/issues/172)
+Fixed: [🐞 [Bug]: CLI Hangs at Initial Plotting 158](https://github.com/subspace/subspace-cli/issues/158)
+
+pr's:
+PR title: Summary bug fix
+PR summary: Closes #172 
+
+PR title: update sdk rev
+PR summary: None
+
+
+There are two [versions](https://en.wikipedia.org/wiki/X86-64#Microarchitecture_levels):
+- x86-64-v3: for newer processors since ~2015
+- x86-64-v2: for older processors since ~2009 and some old VMs
