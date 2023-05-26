@@ -99,7 +99,7 @@ def get_release_data(repo_owner, repo_name, release_tag):
 
 
 def main():
-    release_url = input("Enter the GitHub release URL: ").strip()
+    release_url = input("Enter the GitHub the previous release URL: ").strip()
     while True:
         is_breaking_change = input(
             "is the new release going to be a breaking change? [y/n]: ").strip()
@@ -135,8 +135,6 @@ def main():
         repo_owner, repo_name, release_date)
     merged_prs = get_merged_prs_after_release(
         repo_owner, repo_name, release_date)
-
-    print(merged_prs)
 
     with open('summary.txt', 'w') as f:
         if is_breaking_change:
