@@ -13,4 +13,10 @@ a simple python script
   - PR's merged after he date of the given release
 
 
+# How to run?
+- run `pip3 install requests`
+- run `python3 ./release_notes_template.py`
+- enter the url of the previous release
+- the template release notes will be put under `summary.txt` file
+
 

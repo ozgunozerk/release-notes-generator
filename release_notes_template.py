@@ -149,11 +149,6 @@ def main():
         for pr in merged_prs:
             f.write(pr + '\n')
 
-        # Append the static version explanation
-        f.write(
-            "\nThere are two [versions](https://en.wikipedia.org/wiki/X86-64#Microarchitecture_levels):\n")
-        f.write("- x86-64-v3: for newer processors since ~2015\n")
-        f.write("- x86-64-v2: for older processors since ~2009 and some old VMs\n")
 
     file = open('summary.txt', 'r')
     contents = file.read()
